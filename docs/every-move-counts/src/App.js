@@ -9,6 +9,7 @@ import SpringDashboard from "./pages/SpringDashboard";
 import SummerDashboard from "./pages/SummerDashboard";
 import WinterDashboard from "./pages/WinterDashboard";
 import SettingsPage from "./pages/Settings";
+import HomePage from "./pages/Home"
 
 function PrivateRoute({ children, ...rest }) {
   return (
@@ -37,6 +38,9 @@ function App() {
               <Route exact path="/">
                   <LoginPage />
               </Route>
+              <PrivateRoute path="/home">
+                  <HomePage/>
+              </PrivateRoute>
               <PrivateRoute path="/yearly">
                   <AnnualDashboard />
               </PrivateRoute>

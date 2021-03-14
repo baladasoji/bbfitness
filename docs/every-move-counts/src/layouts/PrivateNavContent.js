@@ -10,6 +10,11 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 const menus = [
     {
+        label: 'Home',
+        icon: <DashboardIcon />,
+        url: '/home',
+    },
+    {
         label: 'Annual Dashboard',
         icon: <DashboardIcon />,
         url: '/yearly',
@@ -20,19 +25,19 @@ const menus = [
         url: '/weekly',
     },
     {
-        label: 'Spring Dashboard',
+        label: 'Winter Dashboard',
+        icon: <DashboardIcon />,
+        url: '/winter',
+    },
+    {
+        label: 'Spring Challenge',
         icon: <DashboardIcon />,
         url: '/spring',
     },
     {
-        label: 'Summer Dashboard',
+        label: 'Summer Challenge',
         icon: <DashboardIcon />,
         url: '/summer',
-    },
-    {
-        label: 'Winter Dashboard',
-        icon: <DashboardIcon />,
-        url: '/winter',
     },
     {
         label: 'Settings',

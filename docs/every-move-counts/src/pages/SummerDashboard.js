@@ -1,14 +1,14 @@
 import React from 'react';
 import Typography from "@material-ui/core/Typography";
-import Athletes from "./Athletes";
+import SeasonalSummary from "./SeasonalSummary";
 
 function SummerDashboardPage() {
     return (
-        <div className="MuiGrid-container" id="testid"> 
+        <div className="MuiGrid-container" id="testid">
         <Typography variant={"h6"} noWrap>
-            Annual Leaderboard - 2021
+            Summer Challenge Leaderboard - 2021 (Week 31 to Week 42)
         </Typography>
-        <Athletes/>
+        <SeasonalSummary start_week_num={31} end_week_num={42}/>
         </div>
     );
 }

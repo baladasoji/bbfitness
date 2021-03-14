@@ -1,14 +1,14 @@
 import React from 'react';
 import Typography from "@material-ui/core/Typography";
-import Athletes from "./Athletes";
+import SeasonalSummary from "./SeasonalSummary";
 
 function SpringDashboard() {
     return (
-        <div className="MuiGrid-container" id="testid"> 
+        <div className="MuiGrid-container" id="testid">
         <Typography variant={"h6"} noWrap>
-            Spring Leaderboard - 2021
+            Spring Challenge Leaderboard - 2021 (Week 13 to Week 22)
         </Typography>
-        <Athletes/>
+        <SeasonalSummary start_week_num={13} end_week_num={22}/>
         </div>
     );
 }

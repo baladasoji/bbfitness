@@ -73,7 +73,7 @@ const PrivateHeader = ({ classes }) => {
     return (
         <>
             <Typography noWrap color={'textSecondary'} className={classes.header}>
-                Fitness Dashboards
+                Every Move Counts
             </Typography>
             <div className={classes.grow} />
             <IconButton aria-label="delete" color="default" onClick={handleLogout}>

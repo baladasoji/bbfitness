@@ -7,8 +7,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const columns = [
   { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
-  { field: 'name', headerName: 'Name', width: 300 },
-  { field: 'totalpoints', headerName: 'Points', type: 'number', width: 130 , cellClassName: (params) =>
+  { field: 'name', headerName: 'Name', width: 200 },
+  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
+  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
+  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
+  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
+  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
+  { field: 'total', headerName: 'Total', type: 'number', width: 120 , cellClassName: (params) =>
       clsx('athlete-app', {
       nx2: params.value < 50,
       nx1: params.value < 100 && params.value >50,
@@ -48,31 +53,40 @@ const useStyles  = {
   },
 };
 
-class Athletes extends React.Component {
+class WeeklySummary extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
         this.state = {
             isLoaded: false,
             error: null,
-            athletes: [],
-            period: 'weekly'
+            weeknumber : 1,
+            ws : [],
+            tabledata: []
         };
     }
 
     componentDidMount() {
 		    this.fetchData();
 	  }
+    shouldComponentUpdate(nextProps, nextState) {
+  		if (nextProps.weeknumber !== this.props.weeknumber) {
+            this.state.tabledata =  processResponse(this.state.ws, nextProps.weeknumber);
+      }
+      return true;
+    }
 
+    /*
   	componentDidUpdate(prevProps) {
   		// compare with previous props
+      console.log("inside did update ");
   		if (prevProps.weeknumber !== this.props.weeknumber) {
-              this.state.isLoaded=false;
-              this.state.athletes=[]
-  			this.fetchData();
-  //            this.render();
+          console.log("week num is different");
+            this.state.tabledata =  processResponse(this.state.ws, this.props.weeknumber);
+  			//this.fetchData();
   		}
   	}
+    */
 
     fetchData() {
       var xhr = new XMLHttpRequest();
@@ -82,9 +96,11 @@ class Athletes extends React.Component {
                     // request succesful
                     var response = xhr.responseText,
                         json = JSON.parse(response);
+                        var newjson=processResponse (json, this.props.weeknumber);
                   this.setState({
                     isLoaded: true,
-                    athletes: json
+                    ws : json,
+                    tabledata: newjson
                    });
                 } else {
                     // error
@@ -96,19 +112,8 @@ class Athletes extends React.Component {
             }
           });
 
-      var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod/"
-      if (typeof(this.props.weeknumber) == "undefined") {
-            this.setState({
-              period: 'yearly'
-            });
-          xhr.open("GET", bb_api_url + '/athlete/activities' , true );
-      }
-      else{
-            this.setState({
-              period: 'weekly'
-            });
-            xhr.open("GET", bb_api_url + '/athlete/activities?week='+this.props.weeknumber , true );
-      }
+      var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod/athlete/summary"
+      xhr.open("GET", bb_api_url, true );
       xhr.send();
     }
 
@@ -123,14 +128,14 @@ class Athletes extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{width:600, height:600 , width: '100%' }} className={classes.root}>
+            body= <div style={{width:'100%', height:400 , margin:10  }} className={classes.root}>
                   <DataGrid
-                    rows={this.state.athletes}
+                    rows={this.state.tabledata}
                     columns={columns}
                     pageSize={10}
                     sortModel={[
                         {
-                          field: 'totalpoints',
+                          field: 'total',
                           sort: 'desc',
                         },
                       ]}
@@ -143,4 +148,28 @@ class Athletes extends React.Component {
       }
 }
 
-export default withStyles(useStyles)(Athletes);
+function processResponse(apidata, weeknumber) {
+  var tablerows = [] ;
+  for (var i=0; i<apidata.length; i++){
+    var tabledata = {} ;
+    var isum=apidata[i];
+    //console.log("Weeknumber is "+weeknumber);
+    var sum = (isum.WeeklySummary[weeknumber-1]).Summary;
+    tabledata.run=sum.Run;
+    tabledata.ride=sum.Ride;
+    tabledata.walk=sum.Walk;
+    tabledata.swim=sum.Swim;
+    tabledata.others=sum.Others;
+    tabledata.total=sum.Total;
+    tabledata.picture=isum.picture;
+    tabledata.name=isum.name;
+    tabledata.id=isum.id;
+    // console.log("isum is", isum);
+    tablerows[i] = tabledata ;
+  }
+console.log("after");
+  console.log(tablerows);
+  return tablerows;
+}
+
+export default withStyles(useStyles)(WeeklySummary);
