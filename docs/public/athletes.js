@@ -28,7 +28,7 @@ function initializeApp() {
 }
 
 function operateFormatter(value, row, index) {
-  return '<i class="fa fa-walking fa-2x"></i>' ;
+  return '<a href="view.html?id='+row.id + '"><i class="fa fa-walking fa-2x"></i> </a>' ;
 }
 
 function imageFormatter(value, row, index) {
@@ -40,10 +40,10 @@ function populateAthletes(allathletes)
   $('#index').bootstrapTable({columns:athletecols, data:allathletes});
   $('#index').bootstrapTable('load',allathletes);
   $('#index').bootstrapTable('refreshOptions',{"theadClasses": "thead-light"});
-  $('#index').on('click-row.bs.table', function (e, row, $element) {
-    apiGetAthleteActivities(row.id);
-  document.getElementById("athleteactivities").scrollIntoView({behavior: "smooth",block:"start"});
-}); 
+//  $('#index').on('click-row.bs.table', function (e, row, $element) {
+//    apiGetAthleteActivities(row.id);
+//  document.getElementById("athleteactivities").scrollIntoView({behavior: "smooth",block:"start"});
+//}); 
   //allresults.forEach(r => { displayResultTable(r);});
 }
 

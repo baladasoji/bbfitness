@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>Rulle Ræs</title>
+		<title>BB Fitness</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -53,15 +53,36 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-								<h1>Race Info</h1>
+								<h1>Athlete Activity Info</h1>
 							</header>
 							<div class="container">
-										<div class="d-flex p-3 justify-content-center mb-2 bg-info text-white h2">Races</div>
-                   <table id="rrraces" data-sortable=true><thead class="thead-dark"/> </table>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="details" id="summaryonly">
+                                  <label class="form-check-label" for="summaryonly">
+                                    Summary
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="details" id="summaryanddetails" checked>
+                                  <label class="form-check-label" for="summaryanddetails">
+                                    Details
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="timescope" id="weekly">
+                                  <label class="form-check-label" for="weekly">
+                                    Weekly
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="timescope" id="anually" checked>
+                                  <label class="form-check-label" for="anually">
+                                    Anually
+                                  </label>
+                                </div>
+							<div class="d-flex p-3 justify-content-center mb-2 bg-info text-white h2">Activities</div>
+                   <table id="athleteactivities" data-sortable=true><thead class="thead-dark"/> </table>
 
-										<div class="d-flex p-3 justify-content-center mb-2 bg-info text-white h2">Players</div>
-                   <table id="rrplayers" data-sortable=true><thead class="thead-dark"/> </table>
-                    </table>
                     <div id="eop"/>
 							</div>
        		</div>
