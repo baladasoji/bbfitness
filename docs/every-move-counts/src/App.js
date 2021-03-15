@@ -11,6 +11,7 @@ import WinterDashboard from "./pages/WinterDashboard";
 import RegisterAccount from "./pages/Register";
 import SettingsPage from "./pages/Settings";
 import HomePage from "./pages/Home"
+import MembersPage from "./pages/MembersPage"
 
 function PrivateRoute({ children, ...rest }) {
   return (
@@ -44,6 +45,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute path="/home">
                   <HomePage/>
+              </PrivateRoute>
+              <PrivateRoute path="/members">
+                  <MembersPage/>
               </PrivateRoute>
               <PrivateRoute path="/yearly">
                   <AnnualDashboard />

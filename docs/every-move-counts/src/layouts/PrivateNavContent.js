@@ -15,6 +15,11 @@ const menus = [
         url: '/home',
     },
     {
+        label: 'Members',
+        icon: <DashboardIcon />,
+        url: '/members',
+    },
+    {
         label: 'Annual Dashboard',
         icon: <DashboardIcon />,
         url: '/yearly',
