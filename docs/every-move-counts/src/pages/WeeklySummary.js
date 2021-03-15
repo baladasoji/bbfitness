@@ -8,11 +8,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const columns = [
   { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
   { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
-  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
-  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
-  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
-  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
   { field: 'total', headerName: 'Total', type: 'number', width: 120 , cellClassName: (params) =>
       clsx('athlete-app', {
       nx2: params.value < 50,
@@ -20,6 +15,11 @@ const columns = [
       px2: params.value > 200 ,
       px1: params.value > 100 && params.value <200 ,
       }), },
+  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
+  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
+  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
+  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
+  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
 ] ;
 
 

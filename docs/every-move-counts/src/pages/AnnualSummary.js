@@ -12,11 +12,6 @@ var threshold_high = 200*cur_week_num;
 const columns = [
   { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
   { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
-  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
-  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
-  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
-  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
   { field: 'total', headerName: 'Total', type: 'number', width: 120 , cellClassName: (params) =>
       clsx('athlete-app', {
       nx2: params.value < threshold_low,
@@ -24,6 +19,11 @@ const columns = [
       px2: params.value > threshold_high ,
       px1: params.value > threshold_medium && params.value <threshold_high,
       }), },
+  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
+  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
+  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
+  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
+  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
 ] ;
 
 

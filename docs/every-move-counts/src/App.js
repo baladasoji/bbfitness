@@ -38,7 +38,7 @@ function App() {
       <BrowserRouter>
           <Switch>
               <Route exact path="/">
-                  <LoginPage />
+                <Redirect to="/home" />
               </Route>
               <PrivateRoute path="/register">
                   <RegisterAccount/>
