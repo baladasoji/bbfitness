@@ -4,8 +4,92 @@ import Typography from "@material-ui/core/Typography";
 function HomePage() {
     return (
         <Typography variant={"h6"} noWrap>
-            This is the Home Page
-        </Typography>
+            <p>
+            ##Vision
+            </p>
+            <p>
+            Movtivate members to maintain an active and healthy life style.
+            Encourage everyone to excercise through periodic challenges.
+            </p>
+            <p>
+            ##Challenges
+            </p>
+
+            <p>
+            For year 2021 we plan to have 2 challenges - Each spanning 12 weeks.
+            </p>
+
+            <p>
+            The spring challenge runs from March 29th (week 13)  to June 20th (week 24)
+            </p>
+            <p>
+            The summer challenge runs from August 2nd (week 31) to October 24th (week 42)
+            </p>
+
+            <p>
+            All members are encouraged to take part in the challenge by being active and working out in these weeks (and through out the year if possible)
+            The activity data from Strava is used as the source of truth for the challenges, The data for each group member is aggregated and shown on the website in the form of points per each week.
+            The goal is to have atleast 100 active points per week.
+            </p>
+
+            <p>
+            ## Point calculation
+            </p>
+            <p>
+            The points are caluculated as follows:
+            </p>
+            <p>
+
+            Swimming - Gives 5 points for every 100m of swimming.
+            Running - Gives 5 points for every km .
+            Walking - Gives 3 points for every km .
+            Cycling/Skating - Gives 2 points for every km.
+            Any other activity - Gives 15 points for 1 hour of activity.
+            </p>
+
+            <p>
+            The detailed calculation of points for every possible activity listed in Strava is provided below
+            5 points per 100m  [ 'Swim' ]
+            5 points per 1km [ 'Run' ]
+            3 points per 1km [ 'Walk' ]
+            2 points per 1km [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard' ]
+            15 points for 1 hour [ 'RockClimbing', 'Canoeing', 'Crossfit', 'EBikeRide', 'Elliptical', 'Handcycle', 'Hike', 'Kayaking', 'Kitesurf', 'NordicSki', 'Wheelchair', 'Windsurf', 'Workout', 'Yoga', 'Rowing', 'Sail', 'Snowboard', 'Snowshoe', 'Soccer', 'StairStepper', 'StandUpPaddling', 'Surfing', 'Velomobile', 'VirtualRide', 'VirtualRun', 'WeightTraining']
+            10 points fo 1 hour [ 'Golf' ]
+            </p>
+
+            <p>
+
+            You can stay green through out the challange by
+            a) Running 20km in a week
+            OR
+            b) Walking 33.3 km in a week
+            OR
+            c) Biking 50 km in a week
+            OR
+            d) Swimming 2000 m in a week
+            OR
+            Combination of any of the above - Lets say 10km run and 25km of biking in a week OR doing yoga for 7 hours in a week.
+
+            !!!! THIS IS NOT A COMPETETITION - There are no dis qualifications or removal from challenges if you fail to stay green.. 
+            You are still encouraged to continue in the challenge and continue your activities for the rest of the challenge.
+            </p>
+
+            <p>
+            ## Strava permissions and Privacy
+            </p>
+
+            <p>
+            In order to participate in the challenges, You need to give permission for the website https://everymovecounts.dk to read your strava profile and activities. This is done through a one time consent. By clicking on the "Link Strava profile" on the website.
+            Once the consent is provided, The website will aggregate your activity data from Strava and present it on the dashboards.
+
+            Your activity data is retained for a maximum period of 1 year - After which it is deleted. 
+            If at any point of time, you wish to revoke this permission, you can do this by visiting the Strava profile and revoking the consent granted.
+            https://www.strava.com/settings/apps -> Every Move Counts -> Revoke Access
+
+            The information presented on the website is public at the moment and does not require any login credentials to view the data on the dashboards etc.
+                        This is the Home Page
+            </p>
+                    </Typography>
     );
 }
 

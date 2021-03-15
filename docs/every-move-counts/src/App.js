@@ -8,6 +8,7 @@ import WeeklyDashboard from "./pages/WeeklyDashboard";
 import SpringDashboard from "./pages/SpringDashboard";
 import SummerDashboard from "./pages/SummerDashboard";
 import WinterDashboard from "./pages/WinterDashboard";
+import RegisterAccount from "./pages/Register";
 import SettingsPage from "./pages/Settings";
 import HomePage from "./pages/Home"
 
@@ -38,6 +39,9 @@ function App() {
               <Route exact path="/">
                   <LoginPage />
               </Route>
+              <PrivateRoute path="/register">
+                  <RegisterAccount/>
+              </PrivateRoute>
               <PrivateRoute path="/home">
                   <HomePage/>
               </PrivateRoute>
