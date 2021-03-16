@@ -12,6 +12,7 @@ import RegisterAccount from "./pages/Register";
 import SettingsPage from "./pages/Settings";
 import HomePage from "./pages/Home"
 import MembersPage from "./pages/MembersPage"
+import ActivitiesPage from "./pages/ActivitiesPage"
 
 function PrivateRoute({ children, ...rest }) {
   return (
@@ -38,7 +39,7 @@ function App() {
       <BrowserRouter>
           <Switch>
               <Route exact path="/">
-                <Redirect to="/home" />
+                <LoginPage/>
               </Route>
               <PrivateRoute path="/register">
                   <RegisterAccount/>
@@ -48,6 +49,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute path="/members">
                   <MembersPage/>
+              </PrivateRoute>
+              <PrivateRoute path="/activities">
+                  <ActivitiesPage/>
               </PrivateRoute>
               <PrivateRoute path="/yearly">
                   <AnnualDashboard />
