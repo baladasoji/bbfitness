@@ -21,6 +21,10 @@ def lambda_handler(event, context):
         summaryItem['WeeklySummary'] = generateSummary(acts)
         generateYearlySummary(summaryItem)
         summarytable.put_item(Item=summaryItem)
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Finished')
+    }
 
 def generateYearlySummary(summaryItem):
     summaryItem['AnnualSummary'] = {'Run':0 , 'Ride':0, 'Walk':0, 'Swim':0, 'Others':0, 'Total':0 } 
@@ -52,16 +56,3 @@ def generateSummary(detailactivities):
             sumact['Summary']['Total'] = sumact['Summary']['Total'] + detailedact['Points']
         del sumact['acts']
     return sumacts;
-           
-            
-
-
-
-def get_qp(event,qp):
-    qpid = None
-    if event.get('params') is not None :
-        qpid=event.get('params').get('querystring').get(qp)
-    return qpid
-
-if __name__ == '__main__':
-    lambda_handler(None,None)

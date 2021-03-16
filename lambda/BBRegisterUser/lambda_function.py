@@ -31,7 +31,7 @@ def lambda_handler(event, context):
         # TODO implement
         return {
             'statusCode': 200,
-            'body': respjson1['athlete']['id']
+            'body': respjson1['athlete']
         }
     else:
         print ("Got a non 200 code :"+ str(resp))
