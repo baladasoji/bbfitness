@@ -28,7 +28,7 @@ return (
 function apiRegisterUser(code)
 {
   var apiXMLReq = new XMLHttpRequest();
-  var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod"
+  var bb_api_url= "https://api.everymovecounts.dk/"
   apiXMLReq.open("POST", bb_api_url + '/athlete' , true );
   var obj = {};
   obj.AuthorizationCode = code ;

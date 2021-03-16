@@ -1,24 +1,34 @@
 import React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Athlete from './Athlete';
+import Strava_Logo from '../static/images/strava_symbol_orange.png'
 
 const columns = [
-  { field: 'Date', headerName: 'Duration', width: 200 },
-  { field: 'Title', headerName: 'Title', width: 90 },
-  { field: 'Type', headerName: 'Type', width: 100 },
-  { field: 'Duration', headerName: 'Duration', width: 200 },
-  { field: 'Distance', headerName: 'Duration', width: 200 },
-  { field: 'Week', headerName: 'Duration', width: 200 }
+  { field: 'Date', headerName: 'Date', width: 120 },
+  { field: 'Week', headerName: 'Week#', width: 100 },
+  { field: 'Title', headerName: 'Title', width: 150 },
+  { field: 'Type', headerName: 'Type', width: 90 },
+  { field: 'Duration', headerName: 'Duration', width: 120 },
+  { field: 'Distance', headerName: 'Distance', width: 120 },
+  { field: 'Points', headerName: 'Points', width: 100 },
+  { field: 'id', headerName: 'StravaLink', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"https://www.strava.com/activities/" + params.value} target="_blank"> <img alt="stravalink" width="25" height="25" src={Strava_Logo}/> </a>)}
 ] ;
+
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(window.location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
 
 class Activities extends React.Component {
     constructor(props) {
         super(props);
+        let chosenid = getURLParameter("id");
         console.log(props);
         this.state = {
             isLoaded: false,
             error: null,
             activities : [],
+            id: chosenid
         };
     }
 
@@ -59,8 +69,12 @@ class Activities extends React.Component {
                 }
             }
           });
+      var bb_api_url = '';
+        if (this.state.id != null )
+             bb_api_url= "https://api.everymovecounts.dk/athlete/activities?id="+this.state.id ;
+        else
+             bb_api_url= "https://api.everymovecounts.dk/athlete/activities" ;
 
-      var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod/athlete/activities"
       xhr.open("GET", bb_api_url, true );
       xhr.send();
     }
@@ -76,12 +90,8 @@ class Activities extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
 
-          body = <div style={{display:'block'}}><CircularProgress /></div>;
-           // body= <div style={{width:'100%', height:400 , margin:10  }}> ;
-          //  {this.state.activities.map(function (value) { return <DataGrid rows={act.activities} columns={columns} pageSize={20}/>; })}
-          //  }
-          //  );
-//            body = body + </div>;
+//          body = <div style={{display:'block'}}><CircularProgress /></div>;
+            body= <div style={{width:'100%', height:800 , margin:10  }}>  {this.state.activities.map(function (act) { return <> <Athlete data={act}/> <DataGrid rows={act.activities} columns={columns} pageSize={20}/></> })} </div> //  }
         }
         console.log("Body is ", body);
         return body ;

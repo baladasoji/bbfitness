@@ -96,7 +96,7 @@ class Athletes extends React.Component {
             }
           });
 
-      var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod/"
+      var bb_api_url= "https://api.everymovecounts.dk/"
       if (typeof(this.props.weeknumber) == "undefined") {
             this.setState({
               period: 'yearly'

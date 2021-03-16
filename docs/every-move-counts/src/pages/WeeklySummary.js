@@ -112,7 +112,7 @@ class WeeklySummary extends React.Component {
             }
           });
 
-      var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod/athlete/summary"
+      var bb_api_url= "https://api.everymovecounts.dk/athlete/summary"
       xhr.open("GET", bb_api_url, true );
       xhr.send();
     }

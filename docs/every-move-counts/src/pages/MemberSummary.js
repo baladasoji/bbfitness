@@ -5,7 +5,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const columns = [
   { field: 'profile_medium', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
   { field: 'firstname', headerName: 'FirstName', width: 200 },
-  { field: 'lastname', headerName: 'LastName', width: 200 }
+  { field: 'lastname', headerName: 'LastName', width: 200 },
+  { field: 'id', headerName: 'Activities', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"/activities?id=" + params.value}> Activities </a>)}
 ] ;
 
 
@@ -57,7 +58,7 @@ class MemberSummary extends React.Component {
             }
           });
 
-      var bb_api_url= "https://09zopybgw3.execute-api.eu-west-1.amazonaws.com/prod/athletes"
+      var bb_api_url= "https://api.everymovecounts.dk/athletes"
       xhr.open("GET", bb_api_url, true );
       xhr.send();
     }
