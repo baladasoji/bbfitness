@@ -50,6 +50,7 @@ def lambda_handler(event, context):
     num_added=0
     num_updated=0
     num_skipped=0
+    num_failed=0
     for athlete in allathletes:
         #print(athlete)
         logger.debug("Athlete is %s ", athlete);
@@ -61,7 +62,7 @@ def lambda_handler(event, context):
         athlete_entry = get_athlete_from_activities (athlete_id, activitytable)
         if athlete_entry is None :
             start_time = start_of_year
-            end_time = start_of_month
+            end_time = curtime
             # We did not find the athlete in the activity table. Hence we get the full monty and set the item
             params= dict(after=start_time,per_page='200',before=end_time)
             resp=requests.get(url=url, params=params,headers=headers)
@@ -80,8 +81,9 @@ def lambda_handler(event, context):
         else:
             start_time= athlete_entry['lastupdated']
             end_time= curtime
-            if end_time-start_time > 86000 :
-                params= dict(after=start_time,per_page='100',before=end_time)
+            # If not updated in the last 12 hours
+            if end_time-start_time > 43000 :
+                params= dict(after=start_time,per_page='150',before=end_time)
                 resp=requests.get(url=url, params=params,headers=headers)
                 newresp = []
                 if resp.status_code == 200 :
@@ -94,6 +96,7 @@ def lambda_handler(event, context):
                     num_updated+=1
                 else:
                     logger.warn ("Got a non 200 code %s", resp)
+                    num_failed+=1
             else :
                 num_skipped+=1
                 logger.debug ('Athlete %s recently updated hence taking no action', athlete_id)
@@ -101,7 +104,7 @@ def lambda_handler(event, context):
     time_taken=curtime_after-curtime
     response = {
         'statusCode': 200,
-        'body': { 'Status' : 'Ok', 'TimeTaken' : time_taken , 'Number of user created' : num_added, 'Number of users updated' : num_updated,'Number of users skipped' : num_skipped  }
+        'body': { 'Status' : 'Ok', 'TimeTaken' : time_taken , 'Number of user created' : num_added, 'Number of users updated' : num_updated,'Number of users skipped' : num_skipped, 'Number of users failed' : num_failed   }
     }
     logger.info(response)
     return response

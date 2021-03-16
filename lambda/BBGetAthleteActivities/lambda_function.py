@@ -6,8 +6,9 @@ from boto3.dynamodb.conditions import Key, Attr
 
 def lambda_handler(event, context):
     athlete_id = get_qp(event,'id')
-    details = get_qp(event,'details')
     week_num = get_qp_asinteger(event,'week')
+    print("Weeknum is")
+    print(week_num)
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('BBAthleteActivities')
     fe=None
@@ -22,13 +23,8 @@ def lambda_handler(event, context):
         acts = item.get('activities')
         if week_num is not None:
             acts=list(filter(lambda act: act.get('Week')==week_num, acts))
+            item['activities'] = acts
             item['week'] = week_num
-        totalpoints = sum(float(i['Points']) for i in acts)
-        if details is None:
-            del item['activities']
-        else :
-            item['activities'] = sorted(acts, key=itemgetter('Date','id'), reverse=True)
-        item['totalpoints'] = totalpoints
     allitems=athleteActivities['Items']
     return allitems
 
