@@ -14,12 +14,11 @@ function HomePage() {
 <tr><td><ul><li>Swim</li></ul></td><td>5</td><td>100 meters</td></tr>
 <tr><td><ul><li>Run</li></ul></td><td>5</td><td>1 km</td></tr>
 <tr><td><ul><li>Walk</li></ul></td><td>3</td><td>1 km</td></tr>
-<tr><td><ul><li>Ride</li><li>InlineSkate</li><li>RollerSki</li><li>AlpineSki</li><li>BackcountrySki</li><li>IceSkate</li><li>Skateboard</li></ul></td><td>2</td><td>1 km</td></tr>
+<tr><td><ul><li>Ride</li><li>EBikeRide</li><li>InlineSkate</li><li>RollerSki</li><li>AlpineSki</li><li>BackcountrySki</li><li>IceSkate</li><li>Skateboard</li></ul></td><td>2</td><td>1 km</td></tr>
 <tr><td><ul>
 <li>RockClimbing</li>
 <li>Canoeing</li>
 <li>Crossfit</li>
-<li>EBikeRide</li>
 <li>Elliptical</li>
 <li>Handcycle</li>
 <li>Hike</li>

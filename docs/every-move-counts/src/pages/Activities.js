@@ -91,7 +91,21 @@ class Activities extends React.Component {
         } else {
 
 //          body = <div style={{display:'block'}}><CircularProgress /></div>;
-            body= <div style={{width:'100%', height:800 , margin:10  }}>  {this.state.activities.map(function (act) { return <> <Athlete data={act}/> <DataGrid rows={act.activities} columns={columns} pageSize={20}/></> })} </div> //  }
+            body= <div style={{width:'100%', height:800 , margin:10  }}>
+              {this.state.activities.map(function (act) 
+                    { return <> <Athlete data={act}/>
+                             <DataGrid rows={act.activities} columns={columns} rowHeight="20" disableColumnMenu pageSize={20}
+                             sortModel={[
+                                {
+                                  field: 'Date',
+                                  sort: 'desc',
+                                },
+                              ]}
+                              />
+                          </>
+                    }
+                )} 
+                </div> 
         }
         console.log("Body is ", body);
         return body ;

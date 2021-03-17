@@ -2,7 +2,7 @@ import React from 'react';
 
 //let urlElements = window.location.href.split('/register');
 //var homeurl =urlElements[0]+'/home';a
-var homeurl = 'http://beta.everymovecounts.dk/home' ;
+var homeurl = 'https://www.everymovecounts.dk/home' ;
     
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(window.location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
