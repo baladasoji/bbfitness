@@ -30,19 +30,9 @@ const menus = [
         url: '/weekly',
     },
     {
-        label: 'Winter Dashboard',
-        icon: <DashboardIcon />,
-        url: '/winter',
-    },
-    {
         label: 'Spring Challenge',
         icon: <DashboardIcon />,
         url: '/spring',
-    },
-    {
-        label: 'Summer Challenge',
-        icon: <DashboardIcon />,
-        url: '/summer',
     },
     {
         label: 'Settings',
