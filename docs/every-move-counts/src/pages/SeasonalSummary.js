@@ -125,7 +125,7 @@ class SeasonalSummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{width:'100%', height:400 , margin:10  }} className={classes.root}>
+            body= <div style={{width:'100%', height:800 , margin:10  }} className={classes.root}>
                   <DataGrid
                     rows={this.state.tabledata}
                     columns={columns}

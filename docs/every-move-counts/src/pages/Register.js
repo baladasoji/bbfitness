@@ -2,7 +2,7 @@ import React from 'react';
 
 //let urlElements = window.location.href.split('/register');
 //var homeurl =urlElements[0]+'/home';a
-var homeurl = 'https://www.everymovecounts.dk/home' ;
+var homeurl = 'http://www.everymovecounts.dk/home' ;
     
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(window.location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -28,7 +28,7 @@ return (
 function apiRegisterUser(code)
 {
   var apiXMLReq = new XMLHttpRequest();
-  var bb_api_url= "https://api.everymovecounts.dk/"
+  var bb_api_url= "https://api.everymovecounts.dk"
   apiXMLReq.open("POST", bb_api_url + '/athlete' , true );
   var obj = {};
   obj.AuthorizationCode = code ;
