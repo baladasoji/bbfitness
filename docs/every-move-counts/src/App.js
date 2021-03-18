@@ -19,7 +19,7 @@ function PrivateRoute({ children, ...rest }) {
       <Route
           {...rest}
           render={({ location }) =>
-              localStorage.getItem('token') ? (
+              localStorage.getItem('token') === 'emc2021' ? (
                   <PrivateLayout>{children}</PrivateLayout>
               ) : (
                   <Redirect
