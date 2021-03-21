@@ -29,10 +29,10 @@ dil2_point_multiplier = 0.005
 distance_intensity_level3 = [ 'Walk' ]
 dil3_point_multiplier = 0.003
 # Gives 2 points per 1 km
-distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard' ]
+distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard','EBikeRide'  ]
 dil4_point_multiplier = 0.002
 # Gives 15 points for 1 hour
-time_intensity_level1 = [ 'RockClimbing', 'Canoeing', 'Crossfit', 'EBikeRide', 'Elliptical', 'Handcycle', 'Hike', 'Kayaking', 'Kitesurf', 'NordicSki', 'Wheelchair', 'Windsurf', 'Workout', 'Yoga', 'Rowing', 'Sail', 'Snowboard', 'Snowshoe', 'Soccer', 'StairStepper', 'StandUpPaddling', 'Surfing', 'Velomobile', 'VirtualRide', 'VirtualRun', 'WeightTraining']
+time_intensity_level1 = [ 'RockClimbing', 'Canoeing', 'Crossfit', 'Elliptical', 'Handcycle', 'Hike', 'Kayaking', 'Kitesurf', 'NordicSki', 'Wheelchair', 'Windsurf', 'Workout', 'Yoga', 'Rowing', 'Sail', 'Snowboard', 'Snowshoe', 'Soccer', 'StairStepper', 'StandUpPaddling', 'Surfing', 'Velomobile', 'VirtualRide', 'VirtualRun', 'WeightTraining']
 til1_point_multiplier = 0.00416
 # Gives 10 points for 1 hour
 time_intensity_level2 = [ 'Golf' ]
