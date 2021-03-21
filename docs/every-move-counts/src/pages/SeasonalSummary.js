@@ -6,9 +6,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {GetWeekNumber} from "./Common"
 
 var cur_week_num = GetWeekNumber(new Date());
+var num_weeks_elapsed = 1;
 var threshold_low = 50;
 var threshold_medium = 100;
 var threshold_high = 200;
+var threshold_low_season = 50*num_weeks_elapsed;
+var threshold_medium_season = 100*num_weeks_elapsed;
+var threshold_high_season = 200*num_weeks_elapsed;
 const columns = [
   { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
   { field: 'name', headerName: 'Name', width: 200 },
@@ -24,7 +28,7 @@ const columns = [
   { field: 'week10', headerName: 'W:10', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
   { field: 'week11', headerName: 'W:11', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
   { field: 'week12', headerName: 'W:12', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'seasontotal', headerName: 'Total', type: 'number', width: 100 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
+  { field: 'seasontotal', headerName: 'Total', type: 'number', width: 100 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low_season, nx1: params.value < threshold_medium_season && params.value >threshold_low_season, px2: params.value > threshold_high_season , px1: params.value > threshold_medium_season && params.value <threshold_high_season, }), },
 ] ;
 
 
@@ -71,6 +75,13 @@ class SeasonalSummary extends React.Component {
     }
 
     componentDidMount() {
+            num_weeks_elapsed = cur_week_num - this.props.start_week_num ;
+            if (num_weeks_elapsed <= 0) {
+                num_weeks_elapsed=1;
+            }
+            threshold_low_season = 50*num_weeks_elapsed;
+            threshold_medium_season = 100*num_weeks_elapsed;
+            threshold_high_season = 200*num_weeks_elapsed;
 		    this.fetchData();
 	  }
     /*

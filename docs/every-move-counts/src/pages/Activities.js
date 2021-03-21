@@ -12,7 +12,7 @@ const columns = [
   { field: 'Duration', headerName: 'Duration', width: 120 },
   { field: 'Distance', headerName: 'Distance', width: 120 },
   { field: 'Points', headerName: 'Points', width: 100 },
-  { field: 'id', headerName: 'StravaLink', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"https://www.strava.com/activities/" + params.value} target="_blank"> <img alt="stravalink" width="25" height="25" src={Strava_Logo}/> </a>)}
+  { field: 'id', headerName: 'StravaLink', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"https://www.strava.com/activities/" + params.value} target="_blank"> <img alt="stravalink" width="15" height="15" src={Strava_Logo}/> </a>)}
 ] ;
 
 function getURLParameter(name) {
