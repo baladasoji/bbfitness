@@ -4,9 +4,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 
 const columns = [
-  { field: 'profile_medium', headerName: 'Pic', width: 60, renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" alt="?" />) },
-  { field: 'fullName', headerName: 'Name',  valueGetter: getFullName, width: 150 },
-  { field: 'id', headerName: 'Activities', width: 100 , renderCell: (params: GridCellParams) => ( <a href={"/activities?id=" + params.value}> <DirectionsRunIcon/> </a>)}
+  { field: 'profile_medium', headerName: 'Pic', width: 60, renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" style={{borderRadius:"40%"}} alt="?" />) },
+  { field: 'fullName', headerName: 'Name',  valueGetter: getFullName, width: 175 },
+  { field: 'id', headerName: 'Activities', width: 75 , renderCell: (params: GridCellParams) => ( <a href={"/activities?id=" + params.value}> <DirectionsRunIcon/> </a>)}
 ] ;
 
 function getFullName(params: ValueGetterParams) {
@@ -78,10 +78,14 @@ class MemberSummary extends React.Component {
             // error
           body = <div>Error occured: { this.state.error }</div>
         } else {
-            body= <div style={{width:'100%', height:800 , margin:10  }}>
+            body= 
+                <div style={{ height: 800, width: '100%' }}>
+                <div style={{ display: 'flex', height: '100%' }}>
+                  <div style={{ flexGrow: 1 }} >
                   <DataGrid
                     rows={this.state.members}
-                    rowHeight = "20"
+                    autoHeight
+                    density="compact"
                     disableColumnMenu
                     sortModel={[
                     {
@@ -90,8 +94,9 @@ class MemberSummary extends React.Component {
                     },
                     ]}
                    columns={columns}
-                    pageSize={30}
                     />
+                </div>
+                </div>
                 </div>
               ;
         }

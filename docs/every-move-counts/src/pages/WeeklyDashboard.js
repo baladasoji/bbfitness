@@ -49,9 +49,8 @@ function WeekNumberSelector(props) {
       weeknums.push(i);
     }
     console.log(weeknums);
-	var options = weeknums.map((i) => {
-		return (
-			<Button id={i} onClick={() => props.onChange(i) }> {i} </Button>
+	var options = weeknums.map((i) => {return ( 
+			<Button size="small" id={i} onClick={() => props.onChange(i) }> {i} </Button> 
 		);
 
 	});

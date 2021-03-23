@@ -5,21 +5,24 @@ import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
+var threshold_low = 50;
+var threshold_medium = 100;
+var threshold_high = 200;
 const columns = [
-  { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'total', headerName: 'Total', type: 'number', width: 120 , cellClassName: (params) =>
+  { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" style={{borderRadius:"40%"}}  alt="?" />) },
+  { field: 'name', headerName: 'Name', width: 175 },
+  { field: 'total', headerName: 'Total', type: 'number', width: 75 , renderHeader:() => ("Σ"), cellClassName: (params) =>
       clsx('athlete-app', {
-      nx2: params.value < 50,
-      nx1: params.value < 100 && params.value >50,
-      px2: params.value > 200 ,
-      px1: params.value > 100 && params.value <200 ,
+      nx2: params.value < threshold_low,
+      nx1: params.value < threshold_medium && params.value >threshold_low,
+      px2: params.value > threshold_high ,
+      px1: params.value > threshold_medium && params.value <threshold_high,
       }), },
-  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
-  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
-  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
-  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
-  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
+  { field: 'run', headerName: 'Run', type: 'number', width: 75, renderHeader: () => ("🏃") },
+  { field: 'ride', headerName: 'Ride', type: 'number', width: 75 , renderHeader: () => ( "🚴" ) },
+  { field: 'walk', headerName: 'Walk', type: 'number', width: 75 , renderHeader: () => ( "🚶") },
+  { field: 'swim', headerName: 'Swim', type: 'number', width: 75 , renderHeader: () => ( "🏊") },
+  { field: 'others', headerName: 'Others', type: 'number', width: 75 , renderHeader: () => ( "🤸") },
 ] ;
 
 
@@ -56,7 +59,7 @@ const useStyles  = {
 class WeeklySummary extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        //console.log(props);
         this.state = {
             isLoaded: false,
             error: null,
@@ -79,9 +82,9 @@ class WeeklySummary extends React.Component {
     /*
   	componentDidUpdate(prevProps) {
   		// compare with previous props
-      console.log("inside did update ");
+      //console.log("inside did update ");
   		if (prevProps.weeknumber !== this.props.weeknumber) {
-          console.log("week num is different");
+          //console.log("week num is different");
             this.state.tabledata =  processResponse(this.state.ws, this.props.weeknumber);
   			//this.fetchData();
   		}
@@ -119,20 +122,23 @@ class WeeklySummary extends React.Component {
 
       render() {
         var body="";
-        console.log("Re rendering");
         if (!this.state.isLoaded) {
-            console.log("Loading... ");
           body = <div style={{display:'block'}}><CircularProgress /></div>;
         } else if (this.state.error) {
             // error
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{width:'100%', height:800 , margin:10  }} className={classes.root}>
+            body= <div style={{ height: 800, width: '100%' }}>
+                <div style={{ display: 'flex', height: '100%' }}>
+                  <div style={{ flexGrow: 1 }} className={classes.root}>
                   <DataGrid
                     rows={this.state.tabledata}
                     columns={columns}
-                    pageSize={10}
+                    disableColumnMenu
+                    autoHeight
+                    density="compact"
+                    disableColumnMenu
                     sortModel={[
                         {
                           field: 'total',
@@ -142,6 +148,7 @@ class WeeklySummary extends React.Component {
 
                      />
                 </div>
+                </div></div>
               ;
         }
         return body ;
@@ -167,8 +174,8 @@ function processResponse(apidata, weeknumber) {
     // console.log("isum is", isum);
     tablerows[i] = tabledata ;
   }
-console.log("after");
-  console.log(tablerows);
+//console.log("after");
+  //console.log(tablerows);
   return tablerows;
 }
 
