@@ -10,6 +10,7 @@ import SummerDashboard from "./pages/SummerDashboard";
 import WinterDashboard from "./pages/WinterDashboard";
 import RegisterAccount from "./pages/Register";
 import SettingsPage from "./pages/Settings";
+import CalendarPage from "./pages/Calendar";
 import HomePage from "./pages/Home"
 import MembersPage from "./pages/MembersPage"
 import ActivitiesPage from "./pages/ActivitiesPage"
@@ -73,6 +74,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute path="/settings">
                   <SettingsPage />
+              </PrivateRoute>
+              <PrivateRoute path="/calendar">
+                  <CalendarPage />
               </PrivateRoute>
           </Switch>
       </BrowserRouter>

@@ -10,7 +10,7 @@ var redirurl = 'https://www.strava.com/oauth/authorize?client_id=52553&redirect_
 
 function SettingsPage() {
     return (
-        <div>
+        <div width="800" height="600">
         <Typography variant={"h6"} noWrap>
             This is the Settings Page
         </Typography>
