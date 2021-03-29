@@ -118,34 +118,48 @@ function EMCEvent() {
     
   };
 
-const EMCEventCard = ({ thumbnail, eventId, eventTitle, eventCreator, eventDate, eventStartTime, eventMap, eventLocation, eventType, description, participants, members }) => {
+const EMCEventCard = ({ eventId, eventTitle,  eventType, eventStartTime, eventEndTime, eventMap, eventHeaders, eventBody, members, participants }) => {
   const styles = useStyles();
   const btnStyles = useGraphicBtnStyles();
   //console.log("participants", participants);
   var yesUsers = [];
   var noUsers = [] ;
-  members.map((mem) =>  {
-                        (participants.indexOf(mem.id.toString()) === -1) ? noUsers.push(mem) : yesUsers.push(mem)  ;
-                        } ) ;
+  var iconString = "🏃";
+  if (eventType === 'Ride') 
+    iconString= "🚴";
+  else if (eventType === 'Run') 
+    iconString= "🏃";
+  else if (eventType === 'Walk') 
+    iconString= "🚶";
+  members.map((mem) =>  { (participants.indexOf(mem.id.toString()) === -1) ? noUsers.push(mem) : yesUsers.push(mem)  ; } ) ;
   //console.log("No Users" , noUsers);
-  //console.log("Yes Users" , yesUsers);
+  console.log("checklist  " , eventBody.checklist);
   noUsers.sort((a, b) => a.firstname.localeCompare(b.firstname));
   yesUsers.sort((a, b) => a.firstname.localeCompare(b.firstname));
   return (
     <div className={styles.root}>
       <Column className={styles.card}>
         <Row p={2} gap={1}>
-          <Avatar>🚴 </Avatar>
+          <Avatar>{iconString} </Avatar>
           <Info position={'middle'} useStyles={useApexInfoStyles}>
             <InfoTitle>{eventTitle}</InfoTitle>
-            <InfoSubtitle>Organizer : {eventCreator}</InfoSubtitle>
-            <InfoSubtitle>{eventDate} {eventStartTime}</InfoSubtitle>
-            <InfoSubtitle>StartLocation: {eventLocation}</InfoSubtitle>
-            <InfoSubtitle> <Link href={eventMap} target="_blank"> Link to Route </Link></InfoSubtitle>
+                {Object.keys(eventHeaders).map(function(keyName, keyIndex) {
+                    return (
+                        <InfoSubtitle> {keyName} : {eventHeaders[keyName]} </InfoSubtitle>
+                    )
+                })}
+                <InfoSubtitle> StartTime :  {new Date(eventStartTime).toString()}</InfoSubtitle>
+                <InfoSubtitle> <Link href={eventMap} target="_blank"> Link to Route </Link></InfoSubtitle>
           </Info>
         </Row>
         <Box pb={1} px={2} color={'grey.600'} fontSize={'0.875rem'} fontFamily={'Ubuntu'} >
-          {description}
+          {eventBody.Description}
+        </Box>
+        <Box pb={0} px={2} color={'grey.700'} fontSize={'0.900rem'} fontFamily={'Ubuntu'} >
+        Checklist 
+        </Box>
+        <Box pb={1} px={2} color={'grey.600'} fontSize={'0.875rem'} fontFamily={'Ubuntu'} ><ul>
+         {eventBody.checklist.map((i) => (<li> {i} </li> ))  } </ul>
         </Box>
         <Box pb={1} px={2} color={'grey.600'} fontSize={'0.875rem'} fontFamily={'Ubuntu'} className={styles.userdisp} >
           <Divider/>
@@ -200,15 +214,14 @@ const EMCEventCard = ({ thumbnail, eventId, eventTitle, eventCreator, eventDate,
                              <EMCEventCard 
                             eventId={item.id} 
                             eventTitle={item.eventTitle} 
-                            eventCreator = {item.eventOrganizer}
-                            eventDate = {item.eventDate} 
-                            eventLocation = {item.startLocation}
-                            eventMap = {item.eventMap}
+                            eventType = {item.eventType }
                             eventStartTime = {item.eventStartTime}
-                            eventType = {item.type }
+                            eventEndTime = {item.eventEndTime}
+                            eventMap = {item.eventMap}
+                            eventHeaders = {item.eventHeaders}
+                            eventBody = {item.eventBody}
                             members = {members}
                             participants = {item.participants}
-                            description={ <b> {item.eventDescription}</b> }
                             />
         </Grid>
         )}

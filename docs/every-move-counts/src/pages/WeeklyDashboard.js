@@ -29,8 +29,8 @@ class WeeklyDashboard extends React.Component {
                     />
             </Typography>
             <div className="MuiGrid-container">
-            <Typography variant={"h5"}>
-                Weekly Leaderboard for week# : {this.state.currentWeekNumber}
+            <Typography variant={"h6"}>
+                Weekly Leaderboard : # {this.state.currentWeekNumber}
             </Typography>
             </div>
             <WeeklySummary weeknumber={this.state.currentWeekNumber}/>
