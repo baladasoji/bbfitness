@@ -64,6 +64,8 @@ class WeeklySummary extends React.Component {
             isLoaded: false,
             error: null,
             weeknumber : 1,
+            num_goal_reached : 0,
+            total_members : 0,
             ws : [],
             tabledata: []
         };
@@ -75,6 +77,8 @@ class WeeklySummary extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
   		if (nextProps.weeknumber !== this.props.weeknumber) {
             this.state.tabledata =  processResponse(this.state.ws, nextProps.weeknumber);
+            this.state.num_goal_reached = countGoalReached(this.state.ws, nextProps.weeknumber);
+
       }
       return true;
     }
@@ -100,10 +104,13 @@ class WeeklySummary extends React.Component {
                     var response = xhr.responseText,
                         json = JSON.parse(response);
                         var newjson=processResponse (json, this.props.weeknumber);
+                        var goalreached = countGoalReached(json, this.props.weeknumber);
                   this.setState({
                     isLoaded: true,
                     ws : json,
-                    tabledata: newjson
+                    tabledata: newjson,
+                    total_members : json.length,
+                    num_goal_reached : goalreached
                    });
                 } else {
                     // error
@@ -129,9 +136,10 @@ class WeeklySummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{ height: 800, width: '100%' }}>
+            body= <div style={{ height:1500, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} className={classes.root}>
+                    {this.state.num_goal_reached} out of {this.state.total_members} members have reached their goal this week
                   <DataGrid
                     rows={this.state.tabledata}
                     columns={columns}
@@ -153,6 +161,17 @@ class WeeklySummary extends React.Component {
         }
         return body ;
       }
+}
+
+function countGoalReached(apidata,weeknumber)
+{
+    var count = 0;
+    for (var i=0; i<apidata.length; i++){
+        var sum = (apidata[i].WeeklySummary[weeknumber-1]).Summary;
+        if (sum.Total >= 100 )
+            count++;
+    }
+    return count;
 }
 
 function processResponse(apidata, weeknumber) {

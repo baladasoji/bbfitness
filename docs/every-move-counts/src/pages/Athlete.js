@@ -1,14 +1,13 @@
 import React from 'react';
 import {Button} from "@material-ui/core";
+import Avatar from '@material-ui/core/Avatar';
 
 function Athlete(v) {
     return (
-        <>
-        <h2> Activities for {v.data.name} </h2>
         <div>
-            <img src={v.data.picture} alt="athletepic"/> 
+        <h2> Activities for {v.data.name} </h2>
+        <Avatar src={v.data.picture} style={{width:'80px', height:'80px'}} alt="athletepic"/> 
         </div>
-        </>
     );
 }
 

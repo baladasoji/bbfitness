@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/lab": "",
     "@material-ui/data-grid": "^4.0.0-alpha.22",
     "@material-ui/icons": "^4.11.2",
     "@mui-treasury/layout": "^4.5.0",
+    "@mui-treasury/components": "",
     "@mui-treasury/mockup": "^1.2.9",
+    "@mui-treasury/styles": "",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",

@@ -4,7 +4,7 @@ import MemberSummary from "./MemberSummary";
 
 function MembersPage() {
     return (
-        <div className="MuiGrid-container" id="testid">
+        <div className="MuiGrid-container">
         <Typography variant={"h6"} noWrap>
             Members
         </Typography>

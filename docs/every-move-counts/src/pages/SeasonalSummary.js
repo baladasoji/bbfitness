@@ -137,7 +137,7 @@ class SeasonalSummary extends React.Component {
         } else {
            const { classes } = this.props;
             body= 
-                <div style={{ height: 800, width: '100%' }}>
+                <div style={{ height: 1500, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} className={classes.root} >
                   <DataGrid

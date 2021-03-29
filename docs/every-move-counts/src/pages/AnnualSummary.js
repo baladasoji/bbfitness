@@ -4,13 +4,14 @@ import { DataGrid } from '@material-ui/data-grid';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {GetWeekNumber} from "./Common"
+import Avatar from '@material-ui/core/Avatar';
 
 var cur_week_num = GetWeekNumber(new Date());
 var threshold_low = 50*cur_week_num;
 var threshold_medium = 100*cur_week_num;
 var threshold_high = 200*cur_week_num;
 const columns = [
-  { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" style={{borderRadius:"40%"}}  alt="?" />) },
+  { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <Avatar src={params.value} style={{width:'30px', height:'30px'}}/>) },
   { field: 'name', headerName: 'Name', width: 175 },
   { field: 'total', headerName: 'Total', type: 'number', width: 75 , renderHeader:() => ("Σ"), cellClassName: (params) =>
       clsx('athlete-app', {
@@ -132,7 +133,7 @@ class AnnualSummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{ height: 800, width: '100%' }}>
+            body= <div style={{ height: 1500, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} className={classes.root}>
                   <DataGrid

@@ -14,7 +14,7 @@ class WeeklyDashboard extends React.Component {
       }
 
     onChange(weekNumber) {
-        console.log("Week number changed" + weekNumber);
+    //    console.log("Week number changed" + weekNumber);
 		this.setState({currentWeekNumber: weekNumber});
 //        this.render();
 	}
@@ -48,7 +48,7 @@ function WeekNumberSelector(props) {
     for (var i = 1; i <= N; i++) {
       weeknums.push(i);
     }
-    console.log(weeknums);
+    //console.log(weeknums);
 	var options = weeknums.map((i) => {return ( 
 			<Button size="small" id={i} onClick={() => props.onChange(i) }> {i} </Button> 
 		);

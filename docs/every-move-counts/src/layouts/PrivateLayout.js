@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { StylesProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Logo from "../static/images/emc.png";
 import {
     Root,
     getHeader,
@@ -60,6 +62,7 @@ const PrivateLayout = ({children}) => {
                         </Content>
 
                         <Footer>
+                            <SharedFooter/>
                         </Footer>
                     </>
                 )}

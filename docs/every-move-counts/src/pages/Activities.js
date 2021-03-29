@@ -6,13 +6,13 @@ import Strava_Logo from '../static/images/strava_symbol_orange.png'
 
 const columns = [
   { field: 'Date', headerName: 'Date', width: 120 },
-  { field: 'Week', headerName: 'Week#', width: 100 },
+  { field: 'Week', headerName: 'Wk#', width: 60 },
   { field: 'Title', headerName: 'Title', width: 150 },
   { field: 'Type', headerName: 'Type', width: 90 },
-  { field: 'Duration', headerName: 'Duration', width: 120 },
-  { field: 'Distance', headerName: 'Distance', width: 120 },
-  { field: 'Points', headerName: 'Points', width: 100 },
-  { field: 'id', headerName: 'StravaLink', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"https://www.strava.com/activities/" + params.value} target="_blank"> <img alt="stravalink" width="15" height="15" src={Strava_Logo}/> </a>)}
+  { field: 'Duration', headerName: 'Duration', width: 80 },
+  { field: 'Distance', headerName: 'Distance', width: 80 },
+  { field: 'Points', headerName: 'Points', width: 80 },
+  { field: 'id', headerName: 'StravaLink', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"https://www.strava.com/activities/" + params.value} target="_blank"> <img alt="stravalink" width="25" height="25" src={Strava_Logo}/> </a>)}
 ] ;
 
 function getURLParameter(name) {
@@ -91,10 +91,15 @@ class Activities extends React.Component {
         } else {
 
 //          body = <div style={{display:'block'}}><CircularProgress /></div>;
-            body= <div style={{width:'100%', height:800 , margin:10  }}>
+            body= <div style={{width:'100%', height:1400 , margin:10  }}>
               {this.state.activities.map(function (act) 
                     { return <> <Athlete data={act}/>
-                             <DataGrid rows={act.activities} columns={columns} rowHeight="20" disableColumnMenu pageSize={20}
+                        <div style={{ display: 'flex', height: '100%' }}>
+                          <div style={{ flexGrow: 1 }} >
+                             <DataGrid rows={act.activities} columns={columns} pageSize={30}
+                            autoHeight
+                            density="compact"
+                            disableColumnMenu
                              sortModel={[
                                 {
                                   field: 'Date',
@@ -102,6 +107,8 @@ class Activities extends React.Component {
                                 },
                               ]}
                               />
+                            </div>
+                            </div>
                           </>
                     }
                 )} 

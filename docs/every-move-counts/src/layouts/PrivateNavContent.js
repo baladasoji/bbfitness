@@ -43,6 +43,11 @@ const menus = [
         url: '/calendar',
     },
     {
+        label: 'Event Signup',
+        icon: <CalendarTodayOutlinedIcon />,
+        url: '/events',
+    },
+    {
         label: 'Settings',
         icon: <SettingsIcon />,
         url: '/settings',
