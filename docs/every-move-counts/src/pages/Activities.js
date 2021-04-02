@@ -9,14 +9,23 @@ const columns = [
   { field: 'Week', headerName: 'Wk#', width: 60 },
   { field: 'Title', headerName: 'Title', width: 150 },
   { field: 'Type', headerName: 'Type', width: 90 },
-  { field: 'Duration', headerName: 'Duration', width: 80 },
-  { field: 'Distance', headerName: 'Distance', width: 80 },
+  { field: 'Duration', headerName: 'hh:mm', width: 80 , valueGetter: convertMinutesToTime},
+  { field: 'Distance', headerName: 'km', width: 80},
   { field: 'Points', headerName: 'Points', width: 80 },
   { field: 'id', headerName: 'StravaLink', width: 200 , renderCell: (params: GridCellParams) => ( <a href={"https://www.strava.com/activities/" + params.value} target="_blank"> <img alt="stravalink" width="25" height="25" src={Strava_Logo}/> </a>)}
 ] ;
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&|#]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(window.location.href) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+function convertMinutesToTime(params: ValueGetterParams) {
+  var t=params.value;
+  t=Math.floor(t);
+  var hours = Math.floor(t/60);
+  var mins = Math.floor(t%60);
+  var paddedmins = mins.toString().padStart(2,0);
+  return ` ${hours}:${paddedmins}`;
 }
 
 class Activities extends React.Component {

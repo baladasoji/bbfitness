@@ -12,13 +12,13 @@ var threshold_medium = 100*cur_week_num;
 var threshold_high = 200*cur_week_num;
 const columns = [
   { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <Avatar src={params.value} style={{width:'30px', height:'30px'}}/>) },
-  { field: 'name', headerName: 'Name', width: 175 },
+  { field: 'fname', headerName: 'Name', width: 175, renderCell: (params: GridRowParams) => ( <a href={"/activities?id=" + params.getValue('id')}> {params.getValue('name')} </a>) },
   { field: 'total', headerName: 'Total', type: 'number', width: 75 , renderHeader:() => ("Σ"), cellClassName: (params) =>
       clsx('athlete-app', {
       nx2: params.value < threshold_low,
-      nx1: params.value < threshold_medium && params.value >threshold_low,
-      px2: params.value > threshold_high ,
-      px1: params.value > threshold_medium && params.value <threshold_high,
+      nx1: params.value < threshold_medium && params.value >=threshold_low,
+      px2: params.value >= threshold_high ,
+      px1: params.value >= threshold_medium && params.value <threshold_high,
       }), },
   { field: 'run', headerName: 'Run', type: 'number', width: 75, renderHeader: () => ("🏃") },
   { field: 'ride', headerName: 'Ride', type: 'number', width: 75 , renderHeader: () => ( "🚴" ) },
