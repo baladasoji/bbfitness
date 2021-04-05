@@ -1,8 +1,10 @@
 import React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
+import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Athlete from './Athlete';
 import Strava_Logo from '../static/images/strava_symbol_orange.png'
+import { deleteActivities } from '../services/deleteactivities';
 
 const columns = [
   { field: 'Date', headerName: 'Date', width: 120 },
@@ -102,7 +104,10 @@ class Activities extends React.Component {
 //          body = <div style={{display:'block'}}><CircularProgress /></div>;
             body= <div style={{width:'100%', height:1400 , margin:10  }}>
               {this.state.activities.map(function (act) 
-                    { return <> <Athlete data={act}/>
+                    { return <> <Athlete data={act}/> <p/>
+                                <Button variant="contained" color="secondary" onClick={() => deleteActivities(act.id, act.name)} >
+                                 Delete Last 1 week Activities
+                                </Button><p/>
                         <div style={{ display: 'flex', height: '100%' }}>
                           <div style={{ flexGrow: 1 }} >
                              <DataGrid rows={act.activities} columns={columns} pageSize={30}
