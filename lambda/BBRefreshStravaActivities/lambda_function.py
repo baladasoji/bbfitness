@@ -136,7 +136,7 @@ def calculatePointsForActivity(r):
     elif activity_type in distance_intensity_level4 :
         points = activity_distance * 0.002
     elif activity_type in time_intensity_level1 :
-        points = activity_time * 0.00416
+        points = activity_time * 0.00417
     points = int(points)
     logger.debug("Activity type: %s , Activity distance: %s, Activity time : %s, Points: %s ", activity_type, activity_distance, activity_time, points )
     return (points)

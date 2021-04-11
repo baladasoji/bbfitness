@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { DataGrid } from '@material-ui/data-grid';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {GetWeekNumber} from "./Common"
+import {GetWeekNumber} from "./Common";
 
 var cur_week_num = GetWeekNumber(new Date());
 var num_weeks_elapsed = 1;
@@ -15,7 +15,7 @@ var threshold_medium_season = 100*num_weeks_elapsed;
 var threshold_high_season = 200*num_weeks_elapsed;
 const columns = [
   { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" style={{borderRadius:'40%'}} alt="?" />) },
-  { field: 'name', headerName: 'Name', width: 175 },
+  { field: 'name', headerName: 'Name', width: 175, renderCell: (params: GridRowParams) => ( <a href={"/activities?id=" + params.getValue('id')}> {params.getValue('name')} </a>) },
   { field: 'week1', headerName: 'W1', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
   { field: 'week2', headerName: 'W2', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), }, 
   { field: 'week3', headerName: 'W3', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
@@ -137,7 +137,7 @@ class SeasonalSummary extends React.Component {
         } else {
            const { classes } = this.props;
             body= 
-                <div style={{ height: 1500, width: '100%' }}>
+                <div style={{ height: 1800, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} className={classes.root} >
                   <DataGrid

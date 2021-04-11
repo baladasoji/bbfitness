@@ -133,7 +133,7 @@ class AnnualSummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{ height: 1500, width: '100%' }}>
+            body= <div style={{ height: 1800, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} className={classes.root}>
                   <DataGrid
