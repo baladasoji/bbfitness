@@ -75,7 +75,7 @@ class SeasonalSummary extends React.Component {
     }
 
     componentDidMount() {
-            num_weeks_elapsed = cur_week_num - this.props.start_week_num ;
+            num_weeks_elapsed = cur_week_num - this.props.start_week_num +1;
             if (num_weeks_elapsed <= 0) {
                 num_weeks_elapsed=1;
             }
