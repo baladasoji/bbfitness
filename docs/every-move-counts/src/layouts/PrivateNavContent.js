@@ -38,6 +38,11 @@ const menus = [
         url: '/spring',
     },
     {
+        label: 'Summer Challenge',
+        icon: <DashboardIcon />,
+        url: '/summer',
+    },
+    {
         label: 'Event Calendar',
         icon: <CalendarTodayOutlinedIcon />,
         url: '/calendar',
