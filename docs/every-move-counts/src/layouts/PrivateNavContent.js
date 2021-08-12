@@ -38,9 +38,9 @@ const menus = [
         url: '/spring',
     },
     {
-        label: 'Summer Challenge',
+        label: 'Autumn Challenge',
         icon: <DashboardIcon />,
-        url: '/summer',
+        url: '/autumn',
     },
     {
         label: 'Event Calendar',

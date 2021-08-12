@@ -7,6 +7,7 @@ import AnnualDashboard from "./pages/AnnualDashboard";
 import WeeklyDashboard from "./pages/WeeklyDashboard";
 import SpringDashboard from "./pages/SpringDashboard";
 import SummerDashboard from "./pages/SummerDashboard";
+import AutumnDashboard from "./pages/AutumnDashboard";
 import WinterDashboard from "./pages/WinterDashboard";
 import RegisterAccount from "./pages/Register";
 import SettingsPage from "./pages/Settings";
@@ -66,6 +67,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute path="/summer">
                   <SummerDashboard />
+              </PrivateRoute>
+              <PrivateRoute path="/autumn">
+                  <AutumnDashboard />
               </PrivateRoute>
               <PrivateRoute path="/winter">
                   <WinterDashboard />

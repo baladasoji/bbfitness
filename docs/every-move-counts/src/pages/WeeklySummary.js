@@ -135,7 +135,7 @@ class WeeklySummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{ height:1800, width: '100%' }}>
+            body= <div style={{ height:2100, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} className={classes.root}>
                     {this.state.num_goal_reached} out of {this.state.total_members} members have reached their goal this week

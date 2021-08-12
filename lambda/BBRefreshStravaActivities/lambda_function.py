@@ -22,12 +22,12 @@ curtime = int(datetime.today().timestamp())
 # Gives 5 points per 100 meters
 distance_intensity_level1 = [ 'Swim' ]
 dil1_point_multiplier = 0.05
-# Gives 5 points per 1 km
+# Gives 6 points per 1 km
 distance_intensity_level2 = [ 'Run' ]
-dil2_point_multiplier = 0.005
-# Gives 3 points per 1 km
+dil2_point_multiplier = 0.006
+# Gives 4 points per 1 km
 distance_intensity_level3 = [ 'Walk' ]
-dil3_point_multiplier = 0.003
+dil3_point_multiplier = 0.004
 # Gives 2 points per 1 km
 distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard','EBikeRide'  ]
 dil4_point_multiplier = 0.002
@@ -130,9 +130,9 @@ def calculatePointsForActivity(r):
     elif activity_type in distance_intensity_level1 :
         points = activity_distance * 0.05
     elif activity_type in distance_intensity_level2 :
-        points = activity_distance * 0.005
+        points = activity_distance * 0.006
     elif activity_type in distance_intensity_level3 :
-        points = activity_distance * 0.003
+        points = activity_distance * 0.004
     elif activity_type in distance_intensity_level4 :
         points = activity_distance * 0.002
     elif activity_type in time_intensity_level1 :
