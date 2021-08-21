@@ -45,7 +45,7 @@ class WeeklyDashboard extends React.Component {
 function WeekNumberSelector(props) {
     var weeknums=[] ;
     var N = GetWeekNumber(new Date());
-    for (var i = 1; i <= N; i++) {
+    for (var i = N; i >= 1; i--) {
       weeknums.push(i);
     }
     //console.log(weeknums);
