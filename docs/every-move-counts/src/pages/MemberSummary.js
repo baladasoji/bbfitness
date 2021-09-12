@@ -79,7 +79,7 @@ class MemberSummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
             body= 
-                <div style={{ height: 2100, width: '100%' }}>
+                <div style={{ height: (this.state.members.length)*40, width: '100%' }}>
                 <div style={{ display: 'flex', height: '100%' }}>
                   <div style={{ flexGrow: 1 }} >
                   <DataGrid
