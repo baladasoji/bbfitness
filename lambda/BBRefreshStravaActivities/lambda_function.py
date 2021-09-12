@@ -29,7 +29,7 @@ dil2_point_multiplier = 0.006
 distance_intensity_level3 = [ 'Walk' ]
 dil3_point_multiplier = 0.004
 # Gives 2 points per 1 km
-distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard','EBikeRide', 'Virtual Ride'  ]
+distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard','EBikeRide', 'Virtual Ride' , 'VirtualRide' ]
 dil4_point_multiplier = 0.002
 # Gives 15 points for 1 hour
 time_intensity_level1 = [ 'RockClimbing', 'Canoeing', 'Crossfit', 'Elliptical', 'Handcycle', 'Hike', 'Kayaking', 'Kitesurf', 'NordicSki', 'Wheelchair', 'Windsurf', 'Workout', 'Yoga', 'Rowing', 'Sail', 'Snowboard', 'Snowshoe', 'Soccer', 'StairStepper', 'StandUpPaddling', 'Surfing', 'Velomobile', 'WeightTraining']
@@ -140,6 +140,8 @@ def calculatePointsForActivity(r):
     elif activity_type in distance_intensity_level4 :
         points = activity_distance * 0.002
     elif activity_type in time_intensity_level1 :
+        points = activity_time * 0.00417
+    else :
         points = activity_time * 0.00417
     points = int(points)
     logger.debug("Activity type: %s , Activity distance: %s, Activity time : %s, Points: %s ", activity_type, activity_distance, activity_time, points )

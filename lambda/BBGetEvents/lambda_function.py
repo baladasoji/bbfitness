@@ -8,5 +8,7 @@ def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('BBEvents')
     events = table.scan()
-    return events['Items']
+    items = events['Items']
+    items.sort(key=operator.itemgetter('id'), reverse=True)
+    return items;
     
