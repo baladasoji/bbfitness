@@ -24,6 +24,9 @@ function HomePage() {
 
 <p ><span >OR </span></p><p ><span >Combination of any of the above - Lets say 10km run and 25km of biking in a week OR doing yoga for 7 hours in a week.</span></p><p ><span >!!!! THIS IS NOT A COMPETITION - There are no disqualification or removal from challenges if you fail to stay green.. You are still encouraged to continue in the challenge and continue your activities for the rest of the challenge.</span></p><p ><span ></span></p><h2><span >Strava permissions and Privacy</span></h2><p ><span>In order to participate in the challenges, You need to give permission for the website www.everymovecounts.dk to read your strava profile and activities. This is done through a one time consent. By clicking on the &quot;Link Strava profile&quot; on the website. Once the consent is provided, The website will aggregate your activity data from Strava and present it on the dashboards. Your activity data is retained for a maximum period of 1 year - After which it is deleted. If at any point of time, you wish to revoke this permission, you can do this by visiting the Strava profile and revoking the consent granted. https://www.strava.com/settings/apps -&gt; Every Move Counts -&gt; Revoke Access </span><span >The information presented on the website is pseudo public and only secured with a simple shared code within the group </span><span >. </span></p>
 
+
+<h2><span >Feedback to the Club </span></h2>
+<p>Feedback can be provided here <a href='https://docs.google.com/spreadsheets/d/1Hzy_nbA3YAL9G-AX_5SE7c0Q0tUIKOFvIC3hrGczick/edit?usp=sharing'> link to feedback sheet </a> </p>
     </div>
     );
 }
