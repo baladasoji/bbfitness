@@ -56,3 +56,6 @@ def generateSummary(detailactivities):
             sumact['Summary']['Total'] = sumact['Summary']['Total'] + detailedact['Points']
         del sumact['acts']
     return sumacts;
+
+if __name__ == '__main__':
+    print(lambda_handler(None,None))

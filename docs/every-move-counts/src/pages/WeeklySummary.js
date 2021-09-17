@@ -178,6 +178,7 @@ function processResponse(apidata, weeknumber) {
   for (var i=0; i<apidata.length; i++){
     var tabledata = {} ;
     var isum=apidata[i];
+    //console.log("isum is "+isum.name);
     //console.log("Weeknumber is "+weeknumber);
     var sum = (isum.WeeklySummary[weeknumber-1]).Summary;
     tabledata.run=sum.Run;
