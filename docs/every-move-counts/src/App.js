@@ -14,7 +14,9 @@ import SettingsPage from "./pages/Settings";
 import CalendarPage from "./pages/Calendar";
 import EventPage from "./pages/EMCEvent";
 import HomePage from "./pages/Home"
+import PrivacyPage from "./pages/Privacy"
 import MembersPage from "./pages/MembersPage"
+import ProfilePage from "./pages/ProfilePage"
 import ActivitiesPage from "./pages/ActivitiesPage"
 
 function PrivateRoute({ children, ...rest }) {
@@ -43,6 +45,9 @@ function App() {
           <Switch>
               <Route exact path="/">
                 <LoginPage/>
+              </Route>
+              <Route exact path="/privacy">
+                <PrivacyPage/>
               </Route>
               <PrivateRoute path="/register">
                   <RegisterAccount/>
@@ -85,6 +90,9 @@ function App() {
               </PrivateRoute>
               <PrivateRoute path="/events">
                   <EventPage />
+              </PrivateRoute>
+              <PrivateRoute path="/profile">
+                  <ProfilePage/>
               </PrivateRoute>
           </Switch>
       </BrowserRouter>

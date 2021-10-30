@@ -57,6 +57,11 @@ const menus = [
         icon: <SettingsIcon />,
         url: '/settings',
     },
+    {
+        label: 'Profile',
+        icon: <SettingsIcon />,
+        url: '/profile',
+    },
 ];
 
 const PrivateNavContent = () => {
