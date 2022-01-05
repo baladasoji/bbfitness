@@ -6,9 +6,9 @@ function SpringDashboard() {
     return (
         <div className="MuiGrid-container" id="testid">
         <Typography variant={"h6"} noWrap>
-            Spring Challenge Leaderboard - 2021 (Week 13 to Week 22)
+            Spring Challenge Leaderboard - 2021 (Week 13 to Week 24)
         </Typography>
-        <SeasonalSummary start_week_num={13} end_week_num={22}/>
+        <SeasonalSummary start_week_num={13} end_week_num={24}/>
         </div>
     );
 }

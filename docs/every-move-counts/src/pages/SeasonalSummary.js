@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { DataGrid } from '@material-ui/data-grid';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {GetWeekNumber} from "./Common"
+import {GetWeekNumber} from "./Common";
 
 var cur_week_num = GetWeekNumber(new Date());
 var num_weeks_elapsed = 1;
@@ -14,21 +14,21 @@ var threshold_low_season = 50*num_weeks_elapsed;
 var threshold_medium_season = 100*num_weeks_elapsed;
 var threshold_high_season = 200*num_weeks_elapsed;
 const columns = [
-  { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'week1', headerName: 'W:1', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week2', headerName: 'W:2', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week3', headerName: 'W:3', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week4', headerName: 'W:4', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week5', headerName: 'W:5', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week6', headerName: 'W:6', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week7', headerName: 'W:7', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week8', headerName: 'W:8', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week9', headerName: 'W:9', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week10', headerName: 'W:10', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week11', headerName: 'W:11', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'week12', headerName: 'W:12', type: 'number', width: 70 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >threshold_low, px2: params.value > threshold_high , px1: params.value > threshold_medium && params.value <threshold_high, }), },
-  { field: 'seasontotal', headerName: 'Total', type: 'number', width: 100 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low_season, nx1: params.value < threshold_medium_season && params.value >threshold_low_season, px2: params.value > threshold_high_season , px1: params.value > threshold_medium_season && params.value <threshold_high_season, }), },
+  { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" style={{borderRadius:'40%'}} alt="?" />) },
+  { field: 'name', headerName: 'Name', width: 175, renderCell: (params: GridRowParams) => ( <a href={"/activities?id=" + params.getValue('id')}> {params.getValue('name')} </a>) },
+  { field: 'week1', headerName: 'W1', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week2', headerName: 'W2', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), }, 
+  { field: 'week3', headerName: 'W3', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week4', headerName: 'W4', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week5', headerName: 'W5', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week6', headerName: 'W6', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week7', headerName: 'W7', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week8', headerName: 'W8', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week9', headerName: 'W9', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week10', headerName: 'W10', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week11', headerName: 'W11', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'week12', headerName: 'W12', type: 'number', width: 60 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low, nx1: params.value < threshold_medium && params.value >=threshold_low, px2: params.value >= threshold_high , px1: params.value >= threshold_medium && params.value <threshold_high, }), },
+  { field: 'seasontotal', headerName: 'Total', type: 'number', width: 100 , cellClassName: (params) => clsx('athlete-app', { nx2: params.value < threshold_low_season, nx1: params.value < threshold_medium_season && params.value >=threshold_low_season, px2: params.value >= threshold_high_season , px1: params.value >= threshold_medium_season && params.value <threshold_high_season, }), },
 ] ;
 
 
@@ -75,7 +75,7 @@ class SeasonalSummary extends React.Component {
     }
 
     componentDidMount() {
-            num_weeks_elapsed = cur_week_num - this.props.start_week_num ;
+            num_weeks_elapsed = cur_week_num - this.props.start_week_num +1;
             if (num_weeks_elapsed <= 0) {
                 num_weeks_elapsed=1;
             }
@@ -136,12 +136,16 @@ class SeasonalSummary extends React.Component {
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{width:'100%', height:800 , margin:10  }} className={classes.root}>
+            body= 
+                <div style={{ height: (this.state.tabledata.length)*40 , width: '100%' }}>
+                <div style={{ display: 'flex', height: '100%' }}>
+                  <div style={{ flexGrow: 1 }} className={classes.root} >
                   <DataGrid
                     rows={this.state.tabledata}
                     columns={columns}
-                    pageSize={10}
+                    autoHeight
                     disableColumnMenu
+                    density="compact"
                     sortModel={[
                         {
                           field: 'seasontotal',
@@ -149,6 +153,8 @@ class SeasonalSummary extends React.Component {
                         },
                       ]}
                      />
+                </div>
+                </div>
                 </div>
               ;
         }

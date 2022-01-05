@@ -7,16 +7,19 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
+import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined';
+import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 
 const menus = [
     {
         label: 'Home',
-        icon: <DashboardIcon />,
+        icon: <HomeOutlinedIcon />,
         url: '/home',
     },
     {
         label: 'Members',
-        icon: <DashboardIcon />,
+        icon: <GroupOutlinedIcon />,
         url: '/members',
     },
     {
@@ -35,9 +38,29 @@ const menus = [
         url: '/spring',
     },
     {
+        label: 'Autumn Challenge',
+        icon: <DashboardIcon />,
+        url: '/autumn',
+    },
+    {
+        label: 'Event Calendar',
+        icon: <CalendarTodayOutlinedIcon />,
+        url: '/calendar',
+    },
+    {
+        label: 'Event Signup',
+        icon: <CalendarTodayOutlinedIcon />,
+        url: '/events',
+    },
+    {
         label: 'Settings',
         icon: <SettingsIcon />,
         url: '/settings',
+    },
+    {
+        label: 'Profile',
+        icon: <SettingsIcon />,
+        url: '/profile',
     },
 ];
 

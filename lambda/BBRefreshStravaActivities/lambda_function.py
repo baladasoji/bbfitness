@@ -22,18 +22,18 @@ curtime = int(datetime.today().timestamp())
 # Gives 5 points per 100 meters
 distance_intensity_level1 = [ 'Swim' ]
 dil1_point_multiplier = 0.05
-# Gives 5 points per 1 km
-distance_intensity_level2 = [ 'Run' ]
-dil2_point_multiplier = 0.005
-# Gives 3 points per 1 km
+# Gives 6 points per 1 km
+distance_intensity_level2 = [ 'Run', 'Virtual Run' ]
+dil2_point_multiplier = 0.006
+# Gives 4 points per 1 km
 distance_intensity_level3 = [ 'Walk' ]
-dil3_point_multiplier = 0.003
+dil3_point_multiplier = 0.004
 # Gives 2 points per 1 km
-distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard' ]
+distance_intensity_level4 = [ 'Ride', 'InlineSkate', 'RollerSki', 'AlpineSki', 'BackcountrySki', 'IceSkate', 'Skateboard','EBikeRide', 'Virtual Ride' , 'VirtualRide' ]
 dil4_point_multiplier = 0.002
 # Gives 15 points for 1 hour
-time_intensity_level1 = [ 'RockClimbing', 'Canoeing', 'Crossfit', 'EBikeRide', 'Elliptical', 'Handcycle', 'Hike', 'Kayaking', 'Kitesurf', 'NordicSki', 'Wheelchair', 'Windsurf', 'Workout', 'Yoga', 'Rowing', 'Sail', 'Snowboard', 'Snowshoe', 'Soccer', 'StairStepper', 'StandUpPaddling', 'Surfing', 'Velomobile', 'VirtualRide', 'VirtualRun', 'WeightTraining']
-til1_point_multiplier = 0.00416
+time_intensity_level1 = [ 'RockClimbing', 'Canoeing', 'Crossfit', 'Elliptical', 'Handcycle', 'Hike', 'Kayaking', 'Kitesurf', 'NordicSki', 'Wheelchair', 'Windsurf', 'Workout', 'Yoga', 'Rowing', 'Sail', 'Snowboard', 'Snowshoe', 'Soccer', 'StairStepper', 'StandUpPaddling', 'Surfing', 'Velomobile', 'WeightTraining']
+til1_point_multiplier = 0.00417
 # Gives 10 points for 1 hour
 time_intensity_level2 = [ 'Golf' ]
 til2_point_multiplier = 0.00277
@@ -61,23 +61,27 @@ def lambda_handler(event, context):
         athlete_pic_url = athlete['tokeninfo']['athlete']['profile_medium']
         athlete_entry = get_athlete_from_activities (athlete_id, activitytable)
         if athlete_entry is None :
+            logger.debug ("did not find athlete entry %s", athlete_id)
             start_time = start_of_year
             end_time = curtime
             # We did not find the athlete in the activity table. Hence we get the full monty and set the item
-            params= dict(after=start_time,per_page='200',before=end_time)
-            resp=requests.get(url=url, params=params,headers=headers)
             newresp = []
             athlete_activities={}
-            if resp.status_code == 200 :
-                respjson=resp.json()
-                for r in respjson:
-                    dt = datetime.strptime(r['start_date_local'], '%Y-%m-%dT%H:%M:%SZ')
-                    newresp.append( {'id': r['id'], 'Title': r['name'], 'Type': r['type'], 'Distance': format(r['distance']/1000, ".2f"), 'Date': str(dt.date()), 'Week': int(dt.strftime('%W')) , 'Duration': format(r['elapsed_time']/60, ".2f"), 'Points':calculatePointsForActivity(r)  } )
-                athlete_activities = {'id' : athlete_id, 'name' : athlete_name , 'picture' : athlete_pic_url, 'lastupdated': end_time, 'activities' : newresp }
-                activitytable.put_item(Item=athlete_activities)
-                num_added+=1
-            else:
-                logger.warn ("Got a non 200 code %s", resp)
+            for pagenum in range(1,10):
+                params= dict(after=start_time,per_page='100',before=end_time,page=pagenum)
+                resp=requests.get(url=url, params=params,headers=headers)
+                if resp.status_code == 200 :
+                    respjson=resp.json()
+                    if len(respjson) == 0 :
+                        break 
+                    for r in respjson:
+                        dt = datetime.strptime(r['start_date_local'], '%Y-%m-%dT%H:%M:%SZ')
+                        newresp.append( {'id': r['id'], 'Title': r['name'], 'Type': r['type'], 'Distance': format(r['distance']/1000, ".2f"), 'Date': str(dt.date()), 'Week': int(dt.strftime('%W')) , 'Duration': format(r['elapsed_time']/60, ".2f"), 'Points':calculatePointsForActivity(r)  } )
+                else:
+                    logger.warn ("Got a non 200 code %s", resp)
+            athlete_activities = {'id' : athlete_id, 'name' : athlete_name , 'picture' : athlete_pic_url, 'lastupdated': end_time, 'activities' : newresp }
+            activitytable.put_item(Item=athlete_activities)
+            num_added+=1
         else:
             start_time= athlete_entry['lastupdated']
             end_time= curtime
@@ -130,13 +134,15 @@ def calculatePointsForActivity(r):
     elif activity_type in distance_intensity_level1 :
         points = activity_distance * 0.05
     elif activity_type in distance_intensity_level2 :
-        points = activity_distance * 0.005
+        points = activity_distance * 0.006
     elif activity_type in distance_intensity_level3 :
-        points = activity_distance * 0.003
+        points = activity_distance * 0.004
     elif activity_type in distance_intensity_level4 :
         points = activity_distance * 0.002
     elif activity_type in time_intensity_level1 :
-        points = activity_time * 0.00416
+        points = activity_time * 0.00417
+    else :
+        points = activity_time * 0.00417
     points = int(points)
     logger.debug("Activity type: %s , Activity distance: %s, Activity time : %s, Points: %s ", activity_type, activity_distance, activity_time, points )
     return (points)

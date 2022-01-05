@@ -14,7 +14,7 @@ class WeeklyDashboard extends React.Component {
       }
 
     onChange(weekNumber) {
-        console.log("Week number changed" + weekNumber);
+    //    console.log("Week number changed" + weekNumber);
 		this.setState({currentWeekNumber: weekNumber});
 //        this.render();
 	}
@@ -29,8 +29,8 @@ class WeeklyDashboard extends React.Component {
                     />
             </Typography>
             <div className="MuiGrid-container">
-            <Typography variant={"h5"}>
-                Weekly Leaderboard for week# : {this.state.currentWeekNumber}
+            <Typography variant={"h6"}>
+                Weekly Leaderboard : # {this.state.currentWeekNumber}
             </Typography>
             </div>
             <WeeklySummary weeknumber={this.state.currentWeekNumber}/>
@@ -45,13 +45,12 @@ class WeeklyDashboard extends React.Component {
 function WeekNumberSelector(props) {
     var weeknums=[] ;
     var N = GetWeekNumber(new Date());
-    for (var i = 1; i <= N; i++) {
+    for (var i = N; i >= 1; i--) {
       weeknums.push(i);
     }
-    console.log(weeknums);
-	var options = weeknums.map((i) => {
-		return (
-			<Button id={i} onClick={() => props.onChange(i) }> {i} </Button>
+    //console.log(weeknums);
+	var options = weeknums.map((i) => {return ( 
+			<Button size="small" id={i} onClick={() => props.onChange(i) }> {i} </Button> 
 		);
 
 	});

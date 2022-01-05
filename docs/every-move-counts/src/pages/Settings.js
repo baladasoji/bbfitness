@@ -1,6 +1,8 @@
 import React from 'react';
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
+import ConnectWithStrava from "../static/images/btn_strava_connectwith_light.png";
+import IconButton from '@material-ui/core/IconButton';
 
 //let urlElements = window.location.href.split('/settings');
 //var registerurl =urlElements[0]+'register';
@@ -10,11 +12,13 @@ var redirurl = 'https://www.strava.com/oauth/authorize?client_id=52553&redirect_
 
 function SettingsPage() {
     return (
-        <div>
+        <div style={{ height: 600, width: '100%' }}>
         <Typography variant={"h6"} noWrap>
             This is the Settings Page
         </Typography>
-        <Button variant="contained" color="primary" href={redirurl}> Link strava account </Button>
+        <IconButton variant="contained" color="primary" href={redirurl}>
+          <img src={ConnectWithStrava} alt="Logo" />
+        </IconButton>
         </div>
     );
 }

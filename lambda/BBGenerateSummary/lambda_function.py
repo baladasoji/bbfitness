@@ -45,7 +45,7 @@ def generateSummary(detailactivities):
         for detailedact in sumact['acts']:
             if (detailedact['Type'] == 'Run'):
                 sumact['Summary']['Run'] = sumact['Summary']['Run'] + detailedact['Points']
-            elif (detailedact['Type'] == 'Ride'):
+            elif (detailedact['Type'] == 'Ride' or detailedact['Type'] == 'EBikeRide' or detailedact['Type'] == 'VirtualRide'):
                 sumact['Summary']['Ride'] = sumact['Summary']['Ride'] + detailedact['Points']
             elif (detailedact['Type'] == 'Walk'):
                 sumact['Summary']['Walk'] = sumact['Summary']['Walk'] + detailedact['Points']
@@ -56,3 +56,6 @@ def generateSummary(detailactivities):
             sumact['Summary']['Total'] = sumact['Summary']['Total'] + detailedact['Points']
         del sumact['acts']
     return sumacts;
+
+if __name__ == '__main__':
+    print(lambda_handler(None,None))

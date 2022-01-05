@@ -5,23 +5,25 @@ import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
+var threshold_low = 50;
+var threshold_medium = 100;
+var threshold_high = 200;
 const columns = [
-  { field: 'picture', headerName: 'Photo', width: 90, renderCell: (params: GridCellParams) => ( <img src={params.value} width="60" height="50" alt="?" />) },
-  { field: 'name', headerName: 'Name', width: 200 },
-  { field: 'total', headerName: 'Total', type: 'number', width: 120 , cellClassName: (params) =>
+  { field: 'picture', headerName: 'Photo', width: 60, renderHeader: () => ("📸"), renderCell: (params: GridCellParams) => ( <img src={params.value} width="40" height="30" style={{borderRadius:"40%"}}  alt="?" />) },
+  { field: 'fname', headerName: 'Name', width: 175, renderCell: (params: GridRowParams) => ( <a href={"/activities?id=" + params.getValue('id')}> {params.getValue('name')} </a>) },
+  { field: 'total', headerName: 'Total', type: 'number', width: 75 , renderHeader:() => ("Σ"), cellClassName: (params) =>
       clsx('athlete-app', {
-      nx2: params.value < 50,
-      nx1: params.value < 100 && params.value >50,
-      px2: params.value > 200 ,
-      px1: params.value > 100 && params.value <200 ,
+      nx2: params.value < threshold_low,
+      nx1: params.value < threshold_medium && params.value >=threshold_low,
+      px2: params.value >= threshold_high ,
+      px1: params.value >= threshold_medium && params.value <threshold_high,
       }), },
-  { field: 'run', headerName: 'Run', type: 'number', width: 100 },
-  { field: 'ride', headerName: 'Ride', type: 'number', width: 100 },
-  { field: 'walk', headerName: 'Walk', type: 'number', width: 100 },
-  { field: 'swim', headerName: 'Swim', type: 'number', width: 100 },
-  { field: 'others', headerName: 'Others', type: 'number', width: 100 },
+  { field: 'run', headerName: 'Run', type: 'number', width: 75, renderHeader: () => ("🏃") },
+  { field: 'ride', headerName: 'Ride', type: 'number', width: 75 , renderHeader: () => ( "🚴" ) },
+  { field: 'walk', headerName: 'Walk', type: 'number', width: 75 , renderHeader: () => ( "🚶") },
+  { field: 'swim', headerName: 'Swim', type: 'number', width: 75 , renderHeader: () => ( "🏊") },
+  { field: 'others', headerName: 'Others', type: 'number', width: 75 , renderHeader: () => ( "🤸") },
 ] ;
-
 
 const useStyles  = {
   root: {
@@ -56,11 +58,13 @@ const useStyles  = {
 class WeeklySummary extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        //console.log(props);
         this.state = {
             isLoaded: false,
             error: null,
             weeknumber : 1,
+            num_goal_reached : 0,
+            total_members : 0,
             ws : [],
             tabledata: []
         };
@@ -72,6 +76,8 @@ class WeeklySummary extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
   		if (nextProps.weeknumber !== this.props.weeknumber) {
             this.state.tabledata =  processResponse(this.state.ws, nextProps.weeknumber);
+            this.state.num_goal_reached = countGoalReached(this.state.ws, nextProps.weeknumber);
+
       }
       return true;
     }
@@ -79,9 +85,9 @@ class WeeklySummary extends React.Component {
     /*
   	componentDidUpdate(prevProps) {
   		// compare with previous props
-      console.log("inside did update ");
+      //console.log("inside did update ");
   		if (prevProps.weeknumber !== this.props.weeknumber) {
-          console.log("week num is different");
+          //console.log("week num is different");
             this.state.tabledata =  processResponse(this.state.ws, this.props.weeknumber);
   			//this.fetchData();
   		}
@@ -97,10 +103,13 @@ class WeeklySummary extends React.Component {
                     var response = xhr.responseText,
                         json = JSON.parse(response);
                         var newjson=processResponse (json, this.props.weeknumber);
+                        var goalreached = countGoalReached(json, this.props.weeknumber);
                   this.setState({
                     isLoaded: true,
                     ws : json,
-                    tabledata: newjson
+                    tabledata: newjson,
+                    total_members : json.length,
+                    num_goal_reached : goalreached
                    });
                 } else {
                     // error
@@ -119,20 +128,24 @@ class WeeklySummary extends React.Component {
 
       render() {
         var body="";
-        console.log("Re rendering");
         if (!this.state.isLoaded) {
-            console.log("Loading... ");
           body = <div style={{display:'block'}}><CircularProgress /></div>;
         } else if (this.state.error) {
             // error
           body = <div>Error occured: { this.state.error }</div>
         } else {
            const { classes } = this.props;
-            body= <div style={{width:'100%', height:800 , margin:10  }} className={classes.root}>
+            body= <div style={{ height:(this.state.tabledata.length)*40, width: '100%' }}>
+                <div style={{ display: 'flex', height: '100%' }}>
+                  <div style={{ flexGrow: 1 }} className={classes.root}>
+                    {this.state.num_goal_reached} out of {this.state.total_members} members have reached their goal this week
                   <DataGrid
                     rows={this.state.tabledata}
                     columns={columns}
-                    pageSize={10}
+                    disableColumnMenu
+                    autoHeight
+                    density="compact"
+                    disableColumnMenu
                     sortModel={[
                         {
                           field: 'total',
@@ -142,10 +155,22 @@ class WeeklySummary extends React.Component {
 
                      />
                 </div>
+                </div></div>
               ;
         }
         return body ;
       }
+}
+
+function countGoalReached(apidata,weeknumber)
+{
+    var count = 0;
+    for (var i=0; i<apidata.length; i++){
+        var sum = (apidata[i].WeeklySummary[weeknumber-1]).Summary;
+        if (sum.Total >= 100 )
+            count++;
+    }
+    return count;
 }
 
 function processResponse(apidata, weeknumber) {
@@ -153,6 +178,7 @@ function processResponse(apidata, weeknumber) {
   for (var i=0; i<apidata.length; i++){
     var tabledata = {} ;
     var isum=apidata[i];
+    //console.log("isum is "+isum.name);
     //console.log("Weeknumber is "+weeknumber);
     var sum = (isum.WeeklySummary[weeknumber-1]).Summary;
     tabledata.run=sum.Run;
@@ -167,8 +193,8 @@ function processResponse(apidata, weeknumber) {
     // console.log("isum is", isum);
     tablerows[i] = tabledata ;
   }
-console.log("after");
-  console.log(tablerows);
+//console.log("after");
+  //console.log(tablerows);
   return tablerows;
 }
 
